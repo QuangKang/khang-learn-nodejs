@@ -11,6 +11,7 @@ Dự án này là tổng hợp các kịch bản thực hành nền tảng về 
 3. [Phần 1: Practice core APIs](#phần-1-practice-core-apis)
 4. [Phần 2: Grocery List REST API](#phần-2-grocery-list-rest-api)
 5. [Testing Guide](#testing-guide)
+6. [Additional Knowledge](#additional-knowledge)
 
 ---
 
@@ -124,3 +125,36 @@ curl -X DELETE http://localhost:3000/api/groceries/2
 ```
 
 ---
+
+## Additional Knowledge
+
+### npm install vs npm ci
+
+**npm install:** Lệnh sử dụng thường xuyên khi develope local.
+- Lệnh này đọc file `package.json` để biết cần tải thư viện gì.
+- Có thể cập nhật phiên bản mới nhất nếu được cho phép bởi file `package.json`.
+- Khi cập nhật phiên bản mới, file `package-lock.json` sẽ được override để lưu lại cập nhật.
+- Check `node_modules` hiện tại và tải thêm nếu thư mục bị thiếu hoặc cập nhật nếu bị outdated.
+- Sử dụng khi cần thêm thư viện mới, cập nhật thư viện cũ hoặc khi mới bắt đầu project.
+
+**npm ci:** Lệnh được dành riêng cho môi trường tự động hóa (CI/CD Pipelines) như GitHub Actions, GitLab CI, Jenkins... hoặc khi muốn một môi trường hoàn toàn "clean".
+- Lệnh sẽ bỏ qua `package.json` và chỉ đọc file `package-lock.json`. Nếu không có thấy file thì sẽ báo lỗi.
+- Chỉ tải chính xác phiên bản được ghi trong file `package-lock.json`, không tự cập nhật.
+- Trước khi tải module, nó sẽ xóa sạch node_modules và tải lại từ đầu để đảm bảo không có file rác từ trước gây conflict. Nên thường nhanh hơn `npm install` khi tải lại mới vì không cần tính toán phiên bản.
+- Được sử dụng khi chạy trên server deploy (CI/CD) để đảm bảo code chạy trên server dùng đúng các thư viện y hệt như lúc lập trình viên chạy trên máy cá nhân hoặc khi dự án bị lỗi liên quan đến thư viện.
+
+### dependencies vs devDependencies
+
+**dependencies:** Đây là những thư viện bắt buộc phải có để ứng dụng có thể chạy được trên server thực tế. Nếu thiếu chúng sẽ báo lỗi và ứng dụng sẽ bị "sập" (crash) ngay lập tức. VD: `express`.
+- Lệnh cài đặt:
+```bash
+npm install <lib-name>
+# Hoặc npm i <lib-name>
+```
+
+**devDependencies:** Đây là những công cụ chỉ phục vụ cho quá trình lập trình viên viết code và kiểm thử trên máy cá nhân. Người dùng cuối hoặc server thật hoàn toàn không cần đến các thư viện này.
+- Lệnh cài đặt:
+```bash
+npm install --save-dev <lib-name>
+# Hoặc npm i -D <lib-name>
+```

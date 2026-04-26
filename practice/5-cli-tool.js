@@ -22,7 +22,7 @@ switch (operation) {
         console.log(`Result: ${left + right}`);
         break;
     case '-':
-        console.log(`Ressult: ${left - right}`);
+        console.log(`Result: ${left - right}`);
         break;
     case 'x':
         console.log(`Result: ${left * right}`);

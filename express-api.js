@@ -23,7 +23,7 @@ app.get('/api/groceries/:id', (req, res) => {
     const item = groceries.find(g => g.id === itemID);
 
     if (!item) {
-        return res.status(400).json({ success: false, message: 'Bad Request.' });
+        return res.status(404).json({ success: false, message: 'Not Found.' });
     }
 
     res.status(200).json({ success: true, data: item });
