@@ -130,7 +130,7 @@ curl -X DELETE http://localhost:3000/api/groceries/2
 
 ### npm install vs npm ci
 
-**npm install:** Lệnh sử dụng thường xuyên khi develope local.
+**npm install:** Lệnh sử dụng thường xuyên khi develop local.
 - Lệnh này đọc file `package.json` để biết cần tải thư viện gì.
 - Có thể cập nhật phiên bản mới nhất nếu được cho phép bởi file `package.json`.
 - Khi cập nhật phiên bản mới, file `package-lock.json` sẽ được override để lưu lại cập nhật.
@@ -158,3 +158,5 @@ npm install <lib-name>
 npm install --save-dev <lib-name>
 # Hoặc npm i -D <lib-name>
 ```
+
+---
